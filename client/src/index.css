@@ -24,11 +24,14 @@ code {
 a{
   text-decoration: none;
 }
-ui li{
+ul li{
   list-style: none;
 }
 button{
   border: none;
+  outline: none;
+  background: none;
+  cursor: pointer;
 }
 
 

@@ -8,8 +8,9 @@ import Cart from './icon/cart.svg'
 import axios from 'axios'
 const Header = () => {
     const state = useContext(GlobalState)
-    const cart = state.userApi.cart
+    const [cart] = state.userApi.cart
     const [isLogged,setIsLogged] = state.userApi.isLogged
+    
 const logoutUser = async () =>{
     await axios.get('/user/logout')
     localStorage.clear()
@@ -19,7 +20,7 @@ const logoutUser = async () =>{
     const loggedRouter = () =>{
 return (
     <>
-    <li><Link to="/history">History</Link></li>
+    <li><Link to="/wishlist">WishList</Link></li>
     <li><Link to="/" onClick={logoutUser} >Logout</Link></li>
     </>
 )
@@ -44,7 +45,7 @@ return (
 
 </ul>
 <div className="cart-icon">
-    <span>{cart.length}</span>
+    <span >{cart.length}</span>
     <Link to ="/cart"><img src={Cart} alt="" width="30"/></Link>
 </div>
         </header>

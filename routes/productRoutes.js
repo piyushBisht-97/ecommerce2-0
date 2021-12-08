@@ -5,7 +5,7 @@ router.route('/products')
 .get(productCtrl.getProducts)
 .post(productCtrl.createProduct)
 
-// router.route('/products/:id')
+router.route('/products/:id')
 // .delete()
 // .put()
 

@@ -7,6 +7,8 @@ import './detailProduct.css'
 function DetailProduct() {
     const params = useParams()
     const state = useContext(GlobalState)
+    const addCart = state.userApi.addCart
+    const addWishlist = state.userApi.addWishlist
     const [products] = state.productApi.products
     const [detailProduct,setDetailProduct] = useState([])
     
@@ -14,9 +16,10 @@ useEffect(()=>{
     if(params){
         products.forEach(product =>{
             if(product._id === params.id) setDetailProduct(product)
+            console.log(detailProduct)
         })
     }
-},[params,products])
+},[params,products,detailProduct])
 if(detailProduct.length===0) return null;
     return (
         <>
@@ -25,13 +28,17 @@ if(detailProduct.length===0) return null;
         <div className="box-detail">
             <div className="row">
              <h2>{detailProduct.title}</h2>
-             <h6>{detailProduct.product_id}</h6>
+            
             </div>
             <span> ₹ {detailProduct.price}</span>
-            <p>{detailProduct.description}</p>
-            <p>{detailProduct.content}</p>
-            <p>Sold :{detailProduct.sold}</p>
-            <Link to="/cart" className="cart">Buy NOw</Link>
+            <h5 style={{marginTop:"20px"}}>{detailProduct.description}</h5>
+            
+            
+           
+            {/* <p>{detailProduct.desciption}</p>  */}
+            {/* <p>Sold :{detailProduct.sold}</p> */}
+            <Link to="/cart" className="cart" onClick={()=> addCart(detailProduct)}>Buy NOw</Link>
+            <Link to="/wishlist" className="cart" onClick={()=> addWishlist(detailProduct)}>WishList</Link>
         </div>
 
         </div>

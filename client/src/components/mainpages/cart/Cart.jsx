@@ -1,16 +1,16 @@
 import React,{useContext,useEffect,useState} from 'react'
 import {GlobalState} from '../../../GlobalState'
 import { Link } from 'react-router-dom'
-
+import axios from "axios"
 import './cart.css'
 
 const Cart = () => {
     
     const state = useContext(GlobalState)
     const [cart,setCart] = state.userApi.cart
+    const [token] = state.token
     const [total,setTotal] = useState(0)
     
-
     useEffect(()=>{
         const getTotal = () =>{
             const total = cart.reduce((prev,item) =>{
@@ -20,6 +20,13 @@ const Cart = () => {
         }
         getTotal()
     },[cart])
+
+const addToCart = async () =>{
+    await axios.patch('/user/addcart',{cart},{
+        headers:{Authorization:token}
+    })
+}
+
     const increment = (id) =>{
         cart.forEach(item =>{
             if(item._id === id){
@@ -27,6 +34,7 @@ const Cart = () => {
             }
         })
         setCart([...cart])
+        addToCart()
     }
     const decrement = (id) =>{
         cart.forEach(item =>{
@@ -35,6 +43,7 @@ const Cart = () => {
             }
         })
         setCart([...cart])
+        addToCart()
     }
     const removeProduct = id =>{
         if(window.confirm("Do you want to delete this product")){
@@ -44,13 +53,18 @@ const Cart = () => {
                 }
             })
             setCart([...cart])
+            addToCart()
         }
     }
 
     if(cart.length ===0)
-    return <h2 style={{textAlign:"center",fontSize:"5rem"}}>Cart Empty</h2>
+    return <h2 style={{textAlign:"center", marginTop:"10rem"}}>Don't be a miser buy something for your loved ones .........</h2>
     
-    
+    const paymentdone = ()=>{
+   alert("Your order has been places and will be delivered to you")
+   setCart([])
+   
+    }
     return (
         <div>
             {
@@ -83,7 +97,7 @@ const Cart = () => {
            }
            <div className="total">
                <h3>Total: ₹ {total}</h3>
-               <Link to="/payment">Payment</Link>
+               <Link to="/payment" onClick={paymentdone}>Payment</Link>
            </div>
         </div>
     )

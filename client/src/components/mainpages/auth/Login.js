@@ -22,6 +22,19 @@ const loginSubmit = async e=>{
         alert(err.response.data.msg)
     }
 }
+const guestLogin = async e =>{
+    e.preventDefault()
+    try{
+await axios.post('/user/login',{
+    email:"piyushbisht1997@gmail.com",
+    password:"boom@123"
+})
+localStorage.setItem('firstLogin',true)
+    window.location.href="/";
+    }catch (err){
+        alert(err.response.data.msg)
+    }
+}
     return (
         <div className="login-page">
             <form onSubmit={loginSubmit}>
@@ -34,6 +47,7 @@ const loginSubmit = async e=>{
 
             <div className="row">
                 <button type="submit">Login</button>
+                <button onClick={guestLogin}>Guest Login</button>
                 <Link to="/register">Register</Link>
             </div>
             </form>

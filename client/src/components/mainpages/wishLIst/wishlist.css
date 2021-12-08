@@ -1,0 +1,12 @@
+.wishButton{
+    background-color: darkblue;
+    border-radius: 5px;
+    
+
+    margin-left: 5px;
+    color: white;
+}
+.cartButton{
+    background-color: darkblue;
+    border-radius: 5px;
+}

@@ -8,6 +8,7 @@ import Cart from './cart/Cart'
 import  NotFound  from './utils/NotFound/NotFound'
 import Payment from './Payment'
 import {GlobalState} from "../../GlobalState"
+import Wishlist from './wishLIst/Wishlist'
 
 const Pages = () => {
     const state = useContext(GlobalState)
@@ -18,6 +19,7 @@ const Pages = () => {
            <Route path ="/detail/:id" exact component={DetailProduct}/>
            <Route path="/login" exact component={isLogged ? NotFound :Login}/>
            <Route path ="/payment" exact component={Payment}/>
+           <Route path= "/wishlist" exact component={Wishlist}/>
            <Route path="/register" exact component={isLogged? NotFound:Register}/>
            <Route path ="/cart" exact component={Cart}/>
            <Route path="*" exact component={NotFound}/>

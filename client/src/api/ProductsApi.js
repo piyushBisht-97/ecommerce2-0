@@ -3,6 +3,9 @@ import axios from 'axios'
 
 const ProductsApi = () => {
     const [products,setProducts] = useState([])
+    // const [category, setCategory] = useState('')
+    // const [sort, setSort] = useState('')
+    // const [search, setSearch] = useState('')
 
     const getProducts = async ()=>{
 
@@ -14,7 +17,10 @@ const ProductsApi = () => {
 getProducts()
     },[])
     return {
-        products :[products,setProducts]
+        products :[products,setProducts],
+        // category:[category, setCategory],
+        // sort:[sort, setSort],
+        // search:[search,setSearch]
     }
 }
 

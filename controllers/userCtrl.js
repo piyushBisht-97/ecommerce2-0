@@ -88,9 +88,38 @@ res.json(user)
     } catch(err){
 return res.status(500).json({msg:err.message})
     }
+},
+addCart:async (req,res) =>{
+    try{
+        const user = await Users.findById(req.user.id)
+        if(!user) return res.status(400).json({msg:"User does not exist"})
+
+        await Users.findOneAndUpdate({_id:req.user.id},{
+            cart:req.body.cart
+        })
+        return res.json({msg:"added to cart"})
+    }catch (err) {
+        return res.status(500).json({msg:err.message})
+    }
+},
+addWishlist:async (req,res) =>{
+    try{
+        const user = await Users.findById(req.user.id)
+        if(!user) return res.status(400).json({msg:"User does not exist"})
+
+        await Users.findOneAndUpdate({_id:req.user.id},{
+            wishlist:req.body.wishlist
+        })
+        return res.json({msg:"added to wishlist"})
+    }catch (err) {
+        return res.status(500).json({msg:err.message})
+    }
 }
 
+
+
 }
+
 const createAccessToken = (user)=>{
  
     return jwt.sign(user,process.env.ACCESS_TOKEN_SECRET,{expiresIn:'1d'})
